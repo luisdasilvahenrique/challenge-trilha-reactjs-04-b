@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { JSXElementConstructor, useRef } from 'react';
 import { FiCheckSquare } from 'react-icons/fi';
 
 import { Form } from './styles';
@@ -29,7 +29,7 @@ interface ModalEditFoodProps{
   editingFood: Ifood;
 }
 
-export default function ModalEditFood({isOpen, setIsOpen, handleUpdateFood ,editingFood}: ModalEditFoodProps):void{
+export default function ModalEditFood({isOpen, setIsOpen, handleUpdateFood, editingFood}: ModalEditFoodProps): JSX.Element {
 
   const formRef = useRef<FormHandles>(null);
 
