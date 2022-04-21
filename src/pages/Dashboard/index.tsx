@@ -1,4 +1,4 @@
-import { Component, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Header from '../../components/Header';
 import api from '../../services/api';
@@ -7,40 +7,41 @@ import ModalAddFood from '../../components/ModalAddFood';
 import ModalEditFood from '../../components/ModalEditFood';
 import { FoodsContainer } from './styles';
 
-interface Ifood{
-  id: number,
-  name: string,
-  description: string,
-  price: number,
-  available: boolean,
-  image: string
+interface IFood {
+  id:number;
+  name:string;
+  description:string;
+  price:string;
+  available:boolean;
+  image:string;
 }
 
-interface AddFood{
-  image: string;
-  name: string;
-  price: string;
-  description: string;
+interface AddFood {
+  image:string;
+  name:string;
+  price:string;
+  description:string;
 }
 
-
-export default function Dashboard(){
-
-  const [foods, setFoods] = useState<Ifood[]>([]);
-  const [editingFood, setEditingFood] = useState<Ifood>({} as Ifood);
+export default function Dashboard() {
+  const [foods, setFoods] = useState<IFood[]>([]);
+  const [editingFood, setEditingFood] = useState<IFood>({} as IFood);
   const [modalOpen, setModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
 
   useEffect(() => {
-   async function getFood() {
-    const response = await api.get('/foods');
-    setFoods(response.data);
-   }
-   getFood();
-  }, [])
-  
+    async function getFoods() {
+      const response = await api.get('/foods');
 
-  const handleAddFood = async (food: AddFood): Promise<void> => {
+      setFoods(response.data);
+    }
+    getFoods()
+  }, [])
+
+  
+  async function handleAddFood(
+    food: Omit<IFood, 'id' | 'available'>,
+  ): Promise<void> {
     try {
       const response = await api.post('/foods', {
         ...food,
@@ -52,7 +53,6 @@ export default function Dashboard(){
       console.log(err);
     }
   }
-
 
   const handleUpdateFood = async (food: AddFood): Promise<void> => {
     try {
@@ -71,25 +71,26 @@ export default function Dashboard(){
     }
   }
 
- const handleDeleteFood = async (id: number )=> {
+  const handleDeleteFood = async (id:number) => {
     await api.delete(`/foods/${id}`);
+
     const foodsFiltered = foods.filter(food => food.id !== id);
+
     setFoods(foodsFiltered);
   }
 
- const toggleModal = () => {
-    setModalOpen(!modalOpen);
+  const toggleModal = () => {
+    setModalOpen( !modalOpen );
   }
 
- const toggleEditModal = () => {
+  const toggleEditModal = () => {
     setEditModalOpen(!editModalOpen);
   }
 
- const handleEditFood = (food: Ifood) => {
+  const handleEditFood = (food: IFood) => {
     setEditModalOpen(true);
     setEditingFood(food);
   }
-
 
   return (
     <>
@@ -121,5 +122,4 @@ export default function Dashboard(){
   );
 
 }
-
 

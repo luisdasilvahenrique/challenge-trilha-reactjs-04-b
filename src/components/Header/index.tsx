@@ -1,21 +1,24 @@
-import { Component } from "react";
-import { FiPlusSquare } from "react-icons/fi";
+import { FiPlusSquare } from 'react-icons/fi';
 
-import { Container } from "./styles";
-import Logo from "../../assets/logo.svg";
+import { Container } from './styles';
+import Logo from '../../assets/logo.svg';
 
 interface HeaderProps {
-  openModal: () => void;
+  openModal: () => void
 }
 
-export default function Header({ openModal }: HeaderProps) {
+export default function Header({openModal}:HeaderProps) {
+
   return (
     <Container>
       <header>
         <img src={Logo} alt="GoRestaurant" />
         <nav>
           <div>
-            <button type="button" onClick={openModal}>
+            <button
+              type="button"
+              onClick={openModal}
+            >
               <div className="text">Novo Prato</div>
               <div className="icon">
                 <FiPlusSquare size={24} />
@@ -25,5 +28,6 @@ export default function Header({ openModal }: HeaderProps) {
         </nav>
       </header>
     </Container>
-  );
+  )
 }
+
