@@ -20,7 +20,7 @@ interface ModalAddFoodProps {
 }
 
 
-export default function ModalAddFood({isOpen, setIsOpen, handleAddFood}:ModalAddFoodProps) {
+export default function ModalAddFood({isOpen, setIsOpen, handleAddFood}:ModalAddFoodProps): JSX.Element {
 
   const handleSubmit = async (data:AddFood) => {
     handleAddFood(data);
