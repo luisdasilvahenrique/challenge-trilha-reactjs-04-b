@@ -1,6 +1,5 @@
 <h1 align="center">
   <img alt="GoRestaurant" src="./src/assets/logo.svg">  
-    <h2 align="center">GoRestaurant<h2/>
 </h1>
 
 <p align="center">
